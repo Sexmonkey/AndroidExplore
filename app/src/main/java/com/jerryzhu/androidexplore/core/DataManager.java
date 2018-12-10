@@ -1,0 +1,128 @@
+package com.jerryzhu.androidexplore.core;
+
+import com.jerryzhu.androidexplore.core.db.DbHelper;
+import com.jerryzhu.androidexplore.core.http.HttpHelper;
+import com.jerryzhu.androidexplore.core.prefs.PreferenceHelper;
+
+/**
+ * author: jerryzhu
+ * Date : 2018/12/8
+ * Description :
+ */
+public class DataManager implements HttpHelper,DbHelper,PreferenceHelper {
+
+    private final HttpHelper mHttpHelper;
+    private final DbHelper mDbHelper;
+    private final PreferenceHelper mPreferenceHelper;
+
+    public DataManager(HttpHelper httpHelper, DbHelper dbHelper, PreferenceHelper preferenceHelper) {
+        mHttpHelper = httpHelper;
+        mDbHelper = dbHelper;
+        mPreferenceHelper = preferenceHelper;
+    }
+
+    @Override
+    public void setLoginAccount(String account) {
+        mPreferenceHelper.setLoginAccount(account);
+
+    }
+
+    @Override
+    public void setLoginPassword(String password) {
+        mPreferenceHelper.setLoginPassword(password);
+
+    }
+
+    @Override
+    public String getLoginAccount() {
+        return mPreferenceHelper.getLoginAccount();
+    }
+
+    @Override
+    public String getPassword() {
+        return mPreferenceHelper.getPassword();
+    }
+
+    @Override
+    public void setLoginStatus(int status) {
+
+        mPreferenceHelper.setLoginStatus(status);
+
+    }
+
+    @Override
+    public int getLoginStatus() {
+        return mPreferenceHelper.getLoginStatus();
+    }
+
+    @Override
+    public void setCookie(String domain, String cookie) {
+        mPreferenceHelper.setCookie(domain,cookie);
+
+    }
+
+    @Override
+    public String getCookie(String domain) {
+        return mPreferenceHelper.getCookie(domain);
+    }
+
+    @Override
+    public void setCurrentPage(int position) {
+
+        mPreferenceHelper.setCurrentPage(position);
+
+    }
+
+    @Override
+    public int getCurrentPage() {
+        return mPreferenceHelper.getCurrentPage();
+    }
+
+    @Override
+    public void setProjectCurrentPage(int position) {
+        mPreferenceHelper.setProjectCurrentPage(position);
+
+    }
+
+    @Override
+    public int getProjectCurrentPage() {
+        return mPreferenceHelper.getProjectCurrentPage();
+    }
+
+    @Override
+    public boolean getAutoCacheState() {
+        return mPreferenceHelper.getAutoCacheState();
+    }
+
+    @Override
+    public boolean getNightModeState() {
+        return mPreferenceHelper.getNightModeState();
+    }
+
+    @Override
+    public boolean getNoImagestate() {
+        return mPreferenceHelper.getNoImagestate();
+    }
+
+    @Override
+    public void setAutoCacheState(boolean state) {
+
+        mPreferenceHelper.setAutoCacheState(state);
+
+    }
+
+    @Override
+    public void setNightModeState(boolean state) {
+
+        mPreferenceHelper.setNightModeState(state);
+
+
+    }
+
+    @Override
+    public void setNoImageState(boolean state) {
+
+        mPreferenceHelper.setNoImageState(state);
+
+    }
+}
