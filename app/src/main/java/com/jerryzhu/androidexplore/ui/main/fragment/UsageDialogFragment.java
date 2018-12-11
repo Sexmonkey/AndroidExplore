@@ -1,4 +1,7 @@
 package com.jerryzhu.androidexplore.ui.main.fragment;
 
-public class UsageDialogFragment {
+import android.app.Fragment;
+
+public class UsageDialogFragment extends Fragment {
+
 }

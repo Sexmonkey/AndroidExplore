@@ -1,5 +1,6 @@
 package com.jerryzhu.androidexplore.ui.main.activity;
 
+import android.animation.Animator;
 import android.content.Intent;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -51,6 +52,22 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
         startAnimation(eightAnimation,"O.json");
         startAnimation(nineAnimation,"I.json");
         startAnimation(tenAnimation,"D.json");
+
+        tenAnimation.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {}
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                jumpTomainActivity();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {}
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {}
+        });
 
     }
 

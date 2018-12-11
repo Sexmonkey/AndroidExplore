@@ -16,13 +16,5 @@ public class SplashPresenter extends BasePresenter<SplashBridge.View> implements
 
     }
 
-    @Override
-    public void attachView(SplashBridge.View view) {
-        super.attachView(view);
-        addSubscribe(Observable.timer(2000,TimeUnit.MILLISECONDS)
-                .subscribeOn(AndroidSchedulers.mainThread())
-        .subscribe(aLong -> view.jumpTomainActivity()));
-
-    }
 
 }
