@@ -43,15 +43,15 @@ public class PreferenceHelperImpl implements PreferenceHelper {
     }
 
     @Override
-    public void setLoginStatus(int status) {
+    public void setLoginStatus(boolean status) {
 
-        mSharedPreferences.edit().putInt(Constants.LOGIN_STATUS,status).apply();
+        mSharedPreferences.edit().putBoolean(Constants.LOGIN_STATUS,status).apply();
 
     }
 
     @Override
-    public int getLoginStatus() {
-        return mSharedPreferences.getInt(Constants.LOGIN_STATUS,0);
+    public boolean getLoginStatus() {
+        return mSharedPreferences.getBoolean(Constants.LOGIN_STATUS,false);
     }
 
     @Override

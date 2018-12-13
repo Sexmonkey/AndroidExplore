@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.main.activity.MainActivity">
+        <activity android:name=".ui.main.activity.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale|screenLayout|mcc|mnc">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN"/>-->
 
@@ -35,6 +36,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.main.activity.LoginActivity"/>
+        <activity android:name=".ui.main.activity.AboutUsActivity"/>
+
     </application>
 
 </manifest>

@@ -35,12 +35,12 @@ public interface AbstractRootPresenter<T extends AbstractRootView> {
     /**
      * @param status
      */
-    void setLoginStatus(int status);
+    void setLoginStatus(boolean status);
 
     /**
      * @return
      */
-    int getLoginStatus();
+    boolean getLoginStatus();
 
     /**
      * @return

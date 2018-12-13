@@ -59,7 +59,11 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                jumpTomainActivity();
+                if (AndroidExploreApp.isFirstRun){
+
+                    jumpTomainActivity();
+                }
+                AndroidExploreApp.isFirstRun = false;
             }
 
             @Override
@@ -85,7 +89,6 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
             jumpTomainActivity();
             return;
         }
-        AndroidExploreApp.isFirstRun = false;
         StatusBarUtil.immersive(this);
     }
 

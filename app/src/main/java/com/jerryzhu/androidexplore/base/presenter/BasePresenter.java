@@ -51,14 +51,14 @@ public class BasePresenter<T extends AbstractRootView> implements AbstractRootPr
     }
 
     @Override
-    public void setLoginStatus(int status) {
+    public void setLoginStatus(boolean status) {
 
         mDataManager.setLoginStatus(status);
 
     }
 
     @Override
-    public int getLoginStatus() {
+    public boolean getLoginStatus() {
         return mDataManager.getLoginStatus();
     }
 

@@ -29,12 +29,12 @@ public interface PreferenceHelper {
     /**
      * @param status
      */
-    void setLoginStatus(int status);
+    void setLoginStatus(boolean status);
 
     /**
      * @return status
      */
-    int getLoginStatus();
+    boolean getLoginStatus();
 
     /**
      * @param domain

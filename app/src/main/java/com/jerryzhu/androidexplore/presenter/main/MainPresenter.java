@@ -7,7 +7,7 @@ import com.jerryzhu.androidexplore.core.DataManager;
 
 import javax.inject.Inject;
 
-public class MainPresenter extends BasePresenter<MainBridge.View> implements Presenter {
+public class MainPresenter extends BasePresenter<MainBridge.View> implements MainBridge.Presenter {
 
     @Inject
     public MainPresenter(DataManager dataManager) {

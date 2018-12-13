@@ -19,6 +19,7 @@ public abstract  class AbstractRootActivity extends SupportActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        System.out.println("AbstractRootActivity===");
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         mUnbinder = ButterKnife.bind(this);

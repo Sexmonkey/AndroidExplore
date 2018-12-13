@@ -1,7 +1,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">AndroidExplore</string>
 
-    <string name="AndroidExplore">AndroidExplore</string>
+    <string name="AndroidExplore" translatable="false">AndroidExplore</string>
 
     //Common
     <string name="http_error">network anomaly</string>

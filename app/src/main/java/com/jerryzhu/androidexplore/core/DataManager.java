@@ -44,14 +44,14 @@ public class DataManager implements HttpHelper,DbHelper,PreferenceHelper {
     }
 
     @Override
-    public void setLoginStatus(int status) {
+    public void setLoginStatus(boolean status) {
 
         mPreferenceHelper.setLoginStatus(status);
 
     }
 
     @Override
-    public int getLoginStatus() {
+    public boolean getLoginStatus() {
         return mPreferenceHelper.getLoginStatus();
     }
 
