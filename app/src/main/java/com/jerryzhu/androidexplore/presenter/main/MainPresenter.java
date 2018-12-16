@@ -9,18 +9,23 @@ import javax.inject.Inject;
 
 public class MainPresenter extends BasePresenter<MainBridge.View> implements MainBridge.Presenter {
 
+    private DataManager mDataManager;
+
     @Inject
     public MainPresenter(DataManager dataManager) {
         super(dataManager);
+        mDataManager = dataManager;
     }
 
     @Override
     public void setCurrentPage(int page) {
+        mDataManager.setCurrentPage(page);
 
     }
 
     @Override
     public void setNightModeState(boolean nightModeState) {
+        mDataManager.setNightModeState(nightModeState);
 
     }
 

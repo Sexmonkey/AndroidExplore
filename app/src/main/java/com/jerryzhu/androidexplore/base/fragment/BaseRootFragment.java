@@ -41,9 +41,9 @@ public abstract class BaseRootFragment<T extends BasePresenter> extends BaseFrag
         View.inflate(_mActivity,R.layout.error_view,parent);
         mLoadingView = parent.findViewById(R.id.loading_group);
         mErrorView = parent.findViewById(R.id.error_group);
-        mReloadTV = (TextView) mErrorView.findViewById(R.id.error_reload_tv);
+        mReloadTV = mErrorView.findViewById(R.id.error_reload_tv);
         mReloadTV.setOnClickListener(view -> reload());
-        mLoadingAnimation = (LottieAnimationView)mLoadingView.findViewById(R.id.loading_animation);
+        mLoadingAnimation = mLoadingView.findViewById(R.id.loading_animation);
         mErrorView.setVisibility(View.GONE);
         mLoadingView.setVisibility(View.GONE);
         mNormalView.setVisibility(View.VISIBLE);

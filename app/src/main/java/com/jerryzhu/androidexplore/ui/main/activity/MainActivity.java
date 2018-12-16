@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainBri
         mFragments = new ArrayList<>();
         if(savedInstanceState == null){
             mPresenter.setNightModeState(false);
-            initPager(false,Constants.TYPE_MAIN_PAGER);
+            initPager(false,Constants.TYPE_HOME_PAGER);
         }else{
             bottomNavigationView.setSelectedItemId(R.id.tab_main_pager);
             initPager(true,Constants.TYPE_SETTING);
@@ -188,7 +188,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainBri
 
     private void init() {
 
-        mPresenter.setCurrentPage(Constants.TYPE_MAIN_PAGER);
+        mPresenter.setCurrentPage(Constants.TYPE_HOME_PAGER);
         initNavigationView();
         initBottomNavigation();
         initDrawerLayout();
@@ -239,7 +239,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainBri
 
                 case R.id.tab_main_pager:
 
-                    loadFragment(getString(R.string.home_pager),0,mHomePagerFragment,Constants.TYPE_MAIN_PAGER);
+                    loadFragment(getString(R.string.home_pager),0,mHomePagerFragment,Constants.TYPE_HOME_PAGER);
 
                     break;
                 case R.id.tab_knowledge_hierarchy:
@@ -428,6 +428,23 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainBri
     }
 
     private void jumpToTop() {
-        Toast.makeText(this,"float_action_btn",Toast.LENGTH_LONG).show();
+        switch (mPresenter.getCurrentPage()) {
+
+            case Constants.TYPE_HOME_PAGER:
+                mHomePagerFragment.jumpToTop();
+
+                break;
+            case 3:
+
+                break;
+
+            default:
+
+                break;
+
+
+        }
+
+
     }
 }

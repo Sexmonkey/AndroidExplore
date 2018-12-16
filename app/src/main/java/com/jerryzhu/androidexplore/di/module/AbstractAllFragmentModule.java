@@ -1,6 +1,7 @@
 package com.jerryzhu.androidexplore.di.module;
 
 import com.jerryzhu.androidexplore.di.component.BaseFragmentComponent;
+import com.jerryzhu.androidexplore.ui.homepager.fragment.HomePagerFragment;
 import com.jerryzhu.androidexplore.ui.main.fragment.CollectFragment;
 import com.jerryzhu.androidexplore.ui.main.fragment.SettingFragment;
 
@@ -16,5 +17,8 @@ public abstract class AbstractAllFragmentModule {
 //
 //    @ContributesAndroidInjector(modules = SettingFragmentModule.class)
 //    abstract SettingFragment contributeSettingFragmentInject();
+
+    @ContributesAndroidInjector(modules = HomePagerFragmentModule.class)
+    abstract HomePagerFragment contributeSettingFragmentInject();
 
 }

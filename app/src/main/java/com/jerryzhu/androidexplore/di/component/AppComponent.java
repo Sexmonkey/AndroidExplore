@@ -5,6 +5,7 @@ import com.jerryzhu.androidexplore.core.DataManager;
 import com.jerryzhu.androidexplore.di.module.AbstractAllActivityModule;
 import com.jerryzhu.androidexplore.di.module.AbstractAllFragmentModule;
 import com.jerryzhu.androidexplore.di.module.AppModlue;
+import com.jerryzhu.androidexplore.di.module.HttpModule;
 
 import javax.inject.Singleton;
 
@@ -24,7 +25,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         AbstractAllActivityModule.class,
         AbstractAllFragmentModule.class,
         AppModlue.class,
-        })
+        HttpModule.class})
 public interface AppComponent {
 
     /**

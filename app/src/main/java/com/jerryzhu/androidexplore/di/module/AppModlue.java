@@ -39,6 +39,7 @@ public class AppModlue {
     @Provides
     @Singleton
     HttpHelper provideHttpHelper(HttpHelperImpl httpHelper){
+
         return httpHelper;
     }
 

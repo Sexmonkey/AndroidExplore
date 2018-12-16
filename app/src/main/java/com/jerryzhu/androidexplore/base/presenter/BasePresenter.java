@@ -17,7 +17,7 @@ import io.reactivex.disposables.Disposable;
 public class BasePresenter<T extends AbstractRootView> implements AbstractRootPresenter<T> {
 
     protected T mView;
-    private DataManager mDataManager;
+    protected DataManager mDataManager;
     private CompositeDisposable mCompositeDisposable;
 
     public BasePresenter(DataManager dataManager) {

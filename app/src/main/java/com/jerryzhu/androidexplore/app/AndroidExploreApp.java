@@ -16,6 +16,7 @@ import com.jerryzhu.androidexplore.core.dao.DaoSession;
 import com.jerryzhu.androidexplore.di.component.AppComponent;
 import com.jerryzhu.androidexplore.di.component.DaggerAppComponent;
 import com.jerryzhu.androidexplore.di.module.AppModlue;
+import com.jerryzhu.androidexplore.di.module.HttpModule;
 import com.jerryzhu.androidexplore.utils.logger.TxtFormatStrategy;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.DiskLogAdapter;
@@ -68,6 +69,7 @@ public class AndroidExploreApp extends Application implements HasActivityInjecto
 
         DaggerAppComponent.builder()
                 .appModlue(new AppModlue(this))
+                .httpModule(new HttpModule())
                 .build()
                 .inject(this);
 

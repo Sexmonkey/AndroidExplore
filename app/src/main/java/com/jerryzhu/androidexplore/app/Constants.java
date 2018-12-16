@@ -29,7 +29,7 @@ public class Constants {
     /**
      * Tag fragment classify
      */
-    public static final int TYPE_MAIN_PAGER = 0;
+    public static final int TYPE_HOME_PAGER = 0;
 
     public static final int TYPE_KNOWLEDGE = 1;
 
