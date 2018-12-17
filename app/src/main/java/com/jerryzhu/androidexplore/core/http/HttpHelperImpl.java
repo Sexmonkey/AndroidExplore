@@ -3,6 +3,7 @@ package com.jerryzhu.androidexplore.core.http;
 import com.jerryzhu.androidexplore.core.bean.BaseResponse;
 import com.jerryzhu.androidexplore.core.bean.mainpager.banner.BannerData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListData;
+import com.jerryzhu.androidexplore.core.bean.mainpager.login.LoginData;
 import com.jerryzhu.androidexplore.core.http.exception.GeekApis;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse<FeedArticleListData>> getLoginData(String username, String password) {
+    public Observable<BaseResponse<LoginData>> getLoginData(String username, String password) {
         return mGeekApis.getLoginData(username,password);
     }
 }

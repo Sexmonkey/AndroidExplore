@@ -42,10 +42,7 @@ public class HomePagerPresenter extends BasePresenter<HomePagerBridge.View> impl
 
     }
 
-    @Override
-    public String getLoginPassword() {
-        return null;
-    }
+
 
     @Override
     public void loadHomePagerData() {
@@ -60,13 +57,29 @@ public class HomePagerPresenter extends BasePresenter<HomePagerBridge.View> impl
                        BaseResponse<LoginData> loginData = CommonUtils.cast(map.get(Constants.LOGIN_DATA));
                         if (loginData.getErrorCode() == BaseResponse.SUCCESS) {
                             loginSuccess(loginData.getData());
+                        }else{
+                            mView.showAutoLoginFail();
+                        }
+
+                        BaseResponse<List<BannerData>> bannerData = CommonUtils.cast(map.get(Constants.BANNER_DATA));
+                        if(bannerData.getErrorCode() == BaseResponse.SUCCESS){
+                            mView.showBannerData(bannerData.getData());
+                        }
+
+                        BaseResponse<FeedArticleListData> feedArticleListData = CommonUtils.cast(map.get(Constants.ARTICLE_DATA));
+
+                        if(feedArticleListData.getErrorCode() == BaseResponse.SUCCESS){
+                            mView.showArticleList(feedArticleListData.getData(),mIsRefresh);
                         }
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
+
                         super.onError(e);
+
+                        mView.showAutoLoginFail();
                     }
                 })
         );
@@ -209,5 +222,17 @@ public class HomePagerPresenter extends BasePresenter<HomePagerBridge.View> impl
                     }}));
 
     }
+
+    @Override
+    public String getLoginAccount() {
+        return mDataManager.getLoginAccount();
+
+    }
+    @Override
+    public String getLoginPassword() {
+
+        return mDataManager.getPassword();
+    }
+
 
 }

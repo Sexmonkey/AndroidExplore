@@ -14,9 +14,11 @@ import com.jerryzhu.androidexplore.R;
 import com.jerryzhu.androidexplore.app.Constants;
 import com.jerryzhu.androidexplore.base.fragment.BaseRootFragment;
 import com.jerryzhu.androidexplore.bridge.homepager.HomePagerBridge;
+import com.jerryzhu.androidexplore.component.RxBus;
 import com.jerryzhu.androidexplore.core.bean.mainpager.banner.BannerData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListData;
+import com.jerryzhu.androidexplore.core.event.AutoLoginEvent;
 import com.jerryzhu.androidexplore.presenter.homepager.HomePagerPresenter;
 import com.jerryzhu.androidexplore.ui.homepager.adapter.HomePageraAapter;
 import com.jerryzhu.androidexplore.ui.main.activity.LoginActivity;
@@ -28,6 +30,8 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
+
+import java.net.CookieManager;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
@@ -220,13 +224,16 @@ public class HomePagerFragment extends BaseRootFragment<HomePagerPresenter> impl
     public void showAutoLoginSuccess() {
         if(isAdded()){
             CommonUtils.showMessage(_mActivity,_mActivity.getString(R.string.login_success));
-//            RxBus
+            RxBus.getDefault().send(new AutoLoginEvent());
         }
 
     }
 
     @Override
     public void showAutoLoginFail() {
+        mPresent.setLoginStatus(false);
+//        CookiesManager
+
 
     }
 

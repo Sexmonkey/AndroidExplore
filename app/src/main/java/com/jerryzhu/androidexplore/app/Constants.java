@@ -98,7 +98,7 @@ public class Constants {
      */
     public static final long CLICK_TIME_AREA = 1000;
 
-    public static final long DOUBLE_INTERVAL_TIME = 2000;
+    public static final long DOUBLE_INTERVAL_TIME = 4000;
 
 
     public static final String ARTICLE_LINK = "article_link";

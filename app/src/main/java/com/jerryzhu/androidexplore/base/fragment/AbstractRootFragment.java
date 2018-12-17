@@ -71,6 +71,8 @@ public abstract class AbstractRootFragment extends SupportFragment {
             if((currentTimeMillis - clickTime) > Constants.DOUBLE_INTERVAL_TIME){
                 CommonUtils.showSnackMessage(_mActivity,getString(R.string.double_click_exit_tint));
                 clickTime = System.currentTimeMillis();
+            }else {
+                _mActivity.finish();
             }
 
         }
