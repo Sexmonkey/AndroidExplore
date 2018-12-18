@@ -5,12 +5,14 @@ import com.jerryzhu.androidexplore.app.AndroidExploreApp;
 import com.jerryzhu.androidexplore.app.Constants;
 import com.jerryzhu.androidexplore.base.presenter.BasePresenter;
 import com.jerryzhu.androidexplore.bridge.homepager.HomePagerBridge;
+import com.jerryzhu.androidexplore.component.RxBus;
 import com.jerryzhu.androidexplore.core.DataManager;
 import com.jerryzhu.androidexplore.core.bean.BaseResponse;
 import com.jerryzhu.androidexplore.core.bean.mainpager.banner.BannerData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.login.LoginData;
+import com.jerryzhu.androidexplore.core.event.LoginEvent;
 import com.jerryzhu.androidexplore.utils.CommonUtils;
 import com.jerryzhu.androidexplore.utils.RxUtils;
 import com.jerryzhu.androidexplore.widget.BaseObserver;
@@ -19,6 +21,7 @@ import java.util.List;
 import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 public class HomePagerPresenter extends BasePresenter<HomePagerBridge.View> implements HomePagerBridge.Presenter {
 
@@ -39,10 +42,18 @@ public class HomePagerPresenter extends BasePresenter<HomePagerBridge.View> impl
 
     private void registerEevent() {
 
+        addSubscribe(RxBus.getDefault().toFlowable(LoginEvent.class).subscribe(new Consumer<LoginEvent>() {
+            @Override
+            public void accept(LoginEvent loginEvent) throws Exception {
+                if (loginEvent.isLogined()){
+                    mView.showLoginView();
+                }else{
+                    mView.showLogoutView();
+                }
+            }
+        }));
 
     }
-
-
 
     @Override
     public void loadHomePagerData() {

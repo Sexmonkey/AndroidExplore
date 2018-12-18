@@ -19,6 +19,7 @@ import com.jerryzhu.androidexplore.core.bean.mainpager.banner.BannerData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListData;
 import com.jerryzhu.androidexplore.core.event.AutoLoginEvent;
+import com.jerryzhu.androidexplore.core.event.LoginEvent;
 import com.jerryzhu.androidexplore.presenter.homepager.HomePagerPresenter;
 import com.jerryzhu.androidexplore.ui.homepager.adapter.HomePageraAapter;
 import com.jerryzhu.androidexplore.ui.main.activity.LoginActivity;
@@ -30,8 +31,6 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
-
-import java.net.CookieManager;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
@@ -101,9 +100,7 @@ public class HomePagerFragment extends BaseRootFragment<HomePagerPresenter> impl
     }
 
     private void startSingleChapterKnowledgePager(int position) {
-
         CommonUtils.showMessage(_mActivity,"startSingleChapterKnowledgePager");
-
     }
 
     private void clickTag(int position) {
@@ -120,10 +117,8 @@ public class HomePagerFragment extends BaseRootFragment<HomePagerPresenter> impl
             return;
         }
         if(mHomePageraAapter.getData().size() < position || mHomePageraAapter.getData().size() <= 0){
-
             return;
         }
-
         FeedArticleData feedArticleData = mHomePageraAapter.getData().get(position);
 
         if(feedArticleData.isCollect()){
@@ -139,7 +134,7 @@ public class HomePagerFragment extends BaseRootFragment<HomePagerPresenter> impl
      * @param position
      */
     private void startArticleDetailPager(View view, int position) {
-        if (mHomePageraAapter.getData().size() <=0 || mHomePageraAapter.getData().size() <= position){
+        if (mHomePageraAapter.getData().size() <= 0 || mHomePageraAapter.getData().size() < position){
             return;
         }
 //      记录点击文章的位置，如果用户点击了收藏返回到此界面时能够显示正确的状态
@@ -189,7 +184,6 @@ public class HomePagerFragment extends BaseRootFragment<HomePagerPresenter> impl
         if(CommonUtils.isNetworkConnected()){
             showLoading();
         }
-
     }
 
     private boolean loggedAndNotRebuilt() {
@@ -214,7 +208,6 @@ public class HomePagerFragment extends BaseRootFragment<HomePagerPresenter> impl
 
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -223,18 +216,15 @@ public class HomePagerFragment extends BaseRootFragment<HomePagerPresenter> impl
     @Override
     public void showAutoLoginSuccess() {
         if(isAdded()){
-            CommonUtils.showMessage(_mActivity,_mActivity.getString(R.string.login_success));
+            CommonUtils.showSnackMessage(_mActivity,_mActivity.getString(R.string.login_success));
             RxBus.getDefault().send(new AutoLoginEvent());
         }
-
     }
 
     @Override
     public void showAutoLoginFail() {
         mPresent.setLoginStatus(false);
-//        CookiesManager
-
-
+        RxBus.getDefault().send(new LoginEvent(false));
     }
 
     @Override
@@ -255,9 +245,7 @@ public class HomePagerFragment extends BaseRootFragment<HomePagerPresenter> impl
             mFeedArticleDataList.addAll(feedArticleListData.getDatas());
             mHomePageraAapter.addData(feedArticleListData.getDatas());
         }
-
         showNormal();
-
     }
 
     @Override
@@ -339,13 +327,11 @@ public class HomePagerFragment extends BaseRootFragment<HomePagerPresenter> impl
 
     @Override
     public void showLoginView() {
-        super.showLoginView();
         mPresent.getFeedArticleList(false);
     }
 
     @Override
     public void showLogoutView() {
-        super.showLogoutView();
         mPresent.getFeedArticleList(false);
     }
 
@@ -356,9 +342,7 @@ public class HomePagerFragment extends BaseRootFragment<HomePagerPresenter> impl
                 && CommonUtils.isNetworkConnected()){
 
             mSmartRefreshLayout.autoRefresh();
-
         }
-
     }
 
     @Override
