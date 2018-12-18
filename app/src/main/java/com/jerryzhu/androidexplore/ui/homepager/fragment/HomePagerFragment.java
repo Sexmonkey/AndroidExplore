@@ -347,11 +347,23 @@ public class HomePagerFragment extends BaseRootFragment<HomePagerPresenter> impl
 
     @Override
     public void showCancelCollectSuccess() {
-        super.showCancelCollectSuccess();
+        if(mHomePageraAapter != null && mHomePageraAapter.getData().size() > mArticlePosition){
+
+            mHomePageraAapter.getData().get(mArticlePosition).setCollect(false);
+            mHomePageraAapter.setData(mArticlePosition,mHomePageraAapter.getData().get(mArticlePosition));
+
+        }
     }
 
     @Override
     public void showCollectSuccess() {
-        super.showCollectSuccess();
+
+        if(mHomePageraAapter != null && mHomePageraAapter.getData().size() > mArticlePosition){
+
+            mHomePageraAapter.getData().get(mArticlePosition).setCollect(true);
+            mHomePageraAapter.setData(mArticlePosition,mHomePageraAapter.getData().get(mArticlePosition));
+
+        }
+
     }
 }

@@ -7,14 +7,14 @@
 
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/articlet_detail_toolbar"
+        android:id="@+id/article_detail_toolbar"
         style="@style/AppTheme.Toolbar"
         android:background="@drawable/blue_gradient_bg"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:titleTextAppearance="@style/Toolbar.TitleText" />
 
     <FrameLayout
-        android:id="@+id/articlet_detail_web_view"
+        android:id="@+id/article_detail_web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"

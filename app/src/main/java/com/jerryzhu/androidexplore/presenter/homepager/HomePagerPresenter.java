@@ -12,6 +12,7 @@ import com.jerryzhu.androidexplore.core.bean.mainpager.banner.BannerData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.login.LoginData;
+import com.jerryzhu.androidexplore.core.event.CollectEvent;
 import com.jerryzhu.androidexplore.core.event.LoginEvent;
 import com.jerryzhu.androidexplore.utils.CommonUtils;
 import com.jerryzhu.androidexplore.utils.RxUtils;
@@ -49,6 +50,17 @@ public class HomePagerPresenter extends BasePresenter<HomePagerBridge.View> impl
                     mView.showLoginView();
                 }else{
                     mView.showLogoutView();
+                }
+            }
+        }));
+
+        addSubscribe(RxBus.getDefault().toFlowable(CollectEvent.class).subscribe(new Consumer<CollectEvent>() {
+            @Override
+            public void accept(CollectEvent collectEvent) throws Exception {
+                if(collectEvent.isCancelCollect()){
+                    mView.showCancelCollectSuccess();
+                }else{
+                    mView.showCollectSuccess();
                 }
             }
         }));
