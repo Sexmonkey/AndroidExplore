@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -18,6 +21,7 @@ import com.jerryzhu.androidexplore.component.RxBus;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListData;
 import com.jerryzhu.androidexplore.core.event.CollectEvent;
 import com.jerryzhu.androidexplore.presenter.main.ArticleDetailPresenter;
+import com.jerryzhu.androidexplore.utils.CommonUtils;
 import com.jerryzhu.androidexplore.utils.StatusBarUtil;
 import com.just.agentweb.AgentWeb;
 
@@ -52,6 +56,43 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
                 .ready()
                 .go(articleLink);
 
+        WebView webView = mAgentWeb.getWebCreator().getWebView();
+        WebSettings settings = webView.getSettings();
+        if(mPresenter.getNoImageState()){
+            settings.setBlockNetworkImage(true);
+        }else{
+            settings.setBlockNetworkImage(false);
+        }
+
+        if(mPresenter.getAutoCacheState()){
+            settings.setAppCacheEnabled(true);
+            settings.setDomStorageEnabled(true);
+            settings.setDatabaseEnabled(true);
+
+            if(CommonUtils.isNetworkConnected()){
+                settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+            }else {
+                settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            }
+        }else{
+            settings.setAppCacheEnabled(false);
+            settings.setDomStorageEnabled(false);
+            settings.setDatabaseEnabled(false);
+            settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        }
+        settings.setJavaScriptEnabled(true);
+        settings.setSupportZoom(true);
+        settings.setBuiltInZoomControls(true);
+        //不显示缩放按钮
+        settings.setDisplayZoomControls(false);
+        //设置自适应屏幕，两者合用
+        //将图片调整到适合WebView的大小
+        settings.setUseWideViewPort(true);
+        //缩放值屏幕大小
+        settings.setLoadWithOverviewMode(true);
+        //自适应屏幕
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
     }
 
     @Override
@@ -79,9 +120,9 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
     public boolean onCreateOptionsMenu(Menu menu) {
         mBundleData = getIntent().getExtras();
         assert mBundleData != null;
-        is_Common_Site = (Boolean)mBundleData.get(Constants.IS_COMMON_SITE);
+        is_Common_Site = (boolean)mBundleData.get(Constants.IS_COMMON_SITE);
         if(is_Common_Site){
-            getMenuInflater().inflate(R.menu.menu_article,menu);
+            getMenuInflater().inflate(R.menu.menu_article_common,menu);
         }else{
             unCommonSite(menu);
         }
@@ -128,9 +169,8 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
     }
 
     private void unCommonSite(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_article_common,menu);
+        getMenuInflater().inflate(R.menu.menu_article,menu);
         mMenuItem = menu.findItem(R.id.item_collect);
-
         if(is_Collect){
             mMenuItem.setTitle(getString(R.string.collect));
             mMenuItem.setIcon(R.mipmap.ic_toolbar_like_p);
@@ -138,7 +178,6 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
             mMenuItem.setTitle(getString(R.string.cancel_collect));
             mMenuItem.setIcon(R.mipmap.ic_toolbar_like_n);
         }
-
     }
 
     private void supportBackPress() {
@@ -157,8 +196,8 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
         if(null != mBundleData){
             article_id = (int) mBundleData.get(Constants.ARTICLE_ID);
             article_title = (String) mBundleData.get(Constants.ARTICLE_TITLE);
-            article_title = (String) mBundleData.get(Constants.ARTICLE_TITLE);
-            is_Collect = (Boolean) mBundleData.get(Constants.ARTICLE_LINK);
+            articleLink = (String) mBundleData.get(Constants.ARTICLE_LINK);
+            is_Collect = (Boolean) mBundleData.get(Constants.IS_COLLECT);
             is_Collect_page = (Boolean) mBundleData.get(Constants.IS_COLLECT_PAGE);
             is_Common_Site = (Boolean) mBundleData.get(Constants.IS_COMMON_SITE);
 
@@ -194,19 +233,28 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         mAgentWeb.getWebLifeCycle().onDestroy();
+        super.onDestroy();
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
         mAgentWeb.getWebLifeCycle().onResume();
+        super.onResume();
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
         mAgentWeb.getWebLifeCycle().onPause();
+        super.onPause();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (mAgentWeb.handleKeyEvent(keyCode, event)) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
