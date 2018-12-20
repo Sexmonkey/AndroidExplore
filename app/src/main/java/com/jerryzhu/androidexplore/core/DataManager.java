@@ -11,7 +11,6 @@ import com.jerryzhu.androidexplore.core.prefs.PreferenceHelper;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * author: jerryzhu
@@ -158,5 +157,10 @@ public class DataManager implements HttpHelper,DbHelper,PreferenceHelper {
     @Override
     public Observable<BaseResponse<LoginData>> getLoginData(String userName, String loginPassword) {
         return mHttpHelper.getLoginData(userName,loginPassword);
+    }
+
+    @Override
+    public Observable<BaseResponse<FeedArticleListData>> cancelCollectPageArticle(int id) {
+        return mHttpHelper.cancelCollectPageArticle(id);
     }
 }

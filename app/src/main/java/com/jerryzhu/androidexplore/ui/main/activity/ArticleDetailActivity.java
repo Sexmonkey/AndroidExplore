@@ -1,5 +1,6 @@
 package com.jerryzhu.androidexplore.ui.main.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ import com.jerryzhu.androidexplore.utils.CommonUtils;
 import com.jerryzhu.androidexplore.utils.StatusBarUtil;
 import com.just.agentweb.AgentWeb;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import java.lang.reflect.Method;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -157,24 +160,19 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
             if(is_Collect){
                 mPresenter.addCollectArticle(article_id);
             }else{
-                mPresenter.cancelCollectArticle(article_id);
+                if (is_Collect_page){
+
+                    mPresenter.cancleCollectPageArticle(article_id);
+
+                }else{
+                    mPresenter.cancelCollectArticle(article_id);
+                }
             }
         }else{
+            CommonUtils.showMessage(this,getString(R.string.login_tint));
             startActivity(new Intent(this,LoginActivity.class));
         }
 
-//        if(is_Collect){
-//            is_Collect = false;
-//            mMenuItem.setTitle(getString(R.string.cancel_collect));
-//            mMenuItem.setIcon(R.mipmap.ic_toolbar_like_n);
-//            RxBus.getDefault().send(new CollectEvent(true));
-//
-//        }else{
-//            is_Collect = true;
-//            mMenuItem.setTitle(getString(R.string.collect));
-//            mMenuItem.setIcon(R.mipmap.ic_toolbar_like_p);
-//            RxBus.getDefault().send(new CollectEvent(false));
-//        }
     }
 
     private void systemBrowerEvent() {
@@ -227,34 +225,34 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
             is_Collect = true;
             mMenuItem.setTitle(getString(R.string.cancel_collect));
             mMenuItem.setIcon(R.mipmap.ic_toolbar_like_p);
-            RxBus.getDefault().send(new CollectEvent(false));
-        //        if(is_Collect){
-//            is_Collect = false;
-//            mMenuItem.setTitle(getString(R.string.cancel_collect));
-//            mMenuItem.setIcon(R.mipmap.ic_toolbar_like_n);
-//            RxBus.getDefault().send(new CollectEvent(true));
-//
-//        }else{
-//            is_Collect = true;
-//            mMenuItem.setTitle(getString(R.string.collect));
-//            mMenuItem.setIcon(R.mipmap.ic_toolbar_like_p);
-//            RxBus.getDefault().send(new CollectEvent(false));
-//        }
+            CommonUtils.showSnackMessage(this,getString(R.string.collect_success));
 
     }
 
     @Override
     public void showCancelCollectArticleData(FeedArticleListData feedArticleListData) {
+        is_Collect = false;
+        if(!is_Collect_page){
+            mMenuItem.setTitle(getString(R.string.collect));
+        }
+        mMenuItem.setIcon(R.mipmap.ic_toolbar_like_n);
+        CommonUtils.showSnackMessage(this,getString(R.string.cancel_collect_success));
 
     }
 
     @Override
     public void shareEvent() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_type_url, getString(R.string.app_name), article_title, articleLink));
+        intent.setType("text/plain");
+        startActivity(intent);
 
     }
 
     @Override
     public void shareError() {
+
+        CommonUtils.showSnackMessage(this,getString(R.string.write_permission_not_allowed));
 
     }
 
@@ -283,5 +281,30 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+
+    /**
+     * 让菜单同时显示图标和文字
+     *
+     * @param featureId Feature id
+     * @param menu Menu
+     * @return menu if opened
+     */
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        if (menu != null) {
+            if (Constants.MENU_BUILDER.equalsIgnoreCase(menu.getClass().getSimpleName())) {
+                try {
+                    @SuppressLint("PrivateApi")
+                    Method method = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+                    method.setAccessible(true);
+                    method.invoke(menu, true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return super.onMenuOpened(featureId, menu);
     }
 }

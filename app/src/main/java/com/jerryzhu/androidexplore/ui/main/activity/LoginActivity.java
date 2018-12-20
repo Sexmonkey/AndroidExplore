@@ -1,17 +1,30 @@
 package com.jerryzhu.androidexplore.ui.main.activity;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.widget.TextView;
+import com.jerryzhu.androidexplore.R;
+import com.jerryzhu.androidexplore.base.activity.BaseActivity;
+import com.jerryzhu.androidexplore.bridge.main.LoginBridge;
+import com.jerryzhu.androidexplore.presenter.main.LoginPresenter;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginBridge.View {
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        TextView textView = new TextView(this);
-        textView.setText("LoginActivity");
-        setContentView(textView);
+    protected void initDataAndEvent() {
+
+    }
+
+    @Override
+    protected void initToolBar() {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_login;
+    }
+
+    @Override
+    public void showLoginSuccess() {
+
     }
 }

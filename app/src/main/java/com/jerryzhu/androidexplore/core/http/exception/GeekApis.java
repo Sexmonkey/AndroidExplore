@@ -54,6 +54,18 @@ public interface GeekApis {
     Observable<BaseResponse<FeedArticleListData>> cancelCollectArticle(@Path("id") int id, @Field("originId") int originId);
 
     /**
+     * 取消站内文章
+     * http://www.wanandroid.com/lg/uncollect/2333/json
+     *
+     * @param id article id
+     * @param originId origin id
+     * @return 取消站内文章数据
+     */
+    @POST("lg/uncollect/{id}/json")
+    @FormUrlEncoded
+    Observable<BaseResponse<FeedArticleListData>> cancelCollectPageArticle(@Path("id") int id,@Field("originId") int originId);
+
+    /**
      * 收藏站内文章
      * http://www.wanandroid.com/lg/collect/1165/json
      *
@@ -75,4 +87,5 @@ public interface GeekApis {
     @POST("user/login")
     @FormUrlEncoded
     Observable<BaseResponse<LoginData>> getLoginData(@Path("username") String username, @Path("password") String password);
+
 }

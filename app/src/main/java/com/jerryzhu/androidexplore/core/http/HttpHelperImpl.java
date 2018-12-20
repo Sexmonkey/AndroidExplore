@@ -46,4 +46,9 @@ public class HttpHelperImpl implements HttpHelper {
     public Observable<BaseResponse<LoginData>> getLoginData(String username, String password) {
         return mGeekApis.getLoginData(username,password);
     }
+
+    @Override
+    public Observable<BaseResponse<FeedArticleListData>> cancelCollectPageArticle(int id) {
+        return mGeekApis.cancelCollectPageArticle(id,-1);
+    }
 }

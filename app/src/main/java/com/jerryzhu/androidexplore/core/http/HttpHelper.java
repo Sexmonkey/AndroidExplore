@@ -55,4 +55,16 @@ public interface HttpHelper {
      * @return 项目类别数据
      */
     Observable<BaseResponse<LoginData>> getLoginData(String username, String password);
+
+
+    /**
+     * 取消收藏页面站内文章
+     * http://www.wanandroid.com/lg/uncollect_originId/2333/json
+     *
+     *
+     * @param i
+     * @param id article id
+     * @return 取消收藏页面站内文章数据
+     */
+    Observable<BaseResponse<FeedArticleListData>> cancelCollectPageArticle(int id);
 }
