@@ -1,6 +1,7 @@
 package com.jerryzhu.androidexplore.ui.main.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -24,6 +25,7 @@ import com.jerryzhu.androidexplore.presenter.main.ArticleDetailPresenter;
 import com.jerryzhu.androidexplore.utils.CommonUtils;
 import com.jerryzhu.androidexplore.utils.StatusBarUtil;
 import com.just.agentweb.AgentWeb;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -110,7 +112,6 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
                 }else{
                     RxBus.getDefault().send(new CollectEvent(true));
                 }
-
                 ArticleDetailActivity.this.supportBackPress();
             }
         });
@@ -135,25 +136,16 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
         switch (item.getItemId()) {
 
             case R.id.item_share:
-
-                shareEvent();
-
+                mPresenter.shareEventPermissionVerify(new RxPermissions(this));
                 break;
             case R.id.item_system_browser:
-
                 systemBrowerEvent();
-
                 break;
             case R.id.item_collect:
-
                 collectEvent();
-
                 break;
-
             default:
-
                 break;
-
         }
 
         return super.onOptionsItemSelected(item);
@@ -161,11 +153,32 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
 
     private void collectEvent() {
 
+        if(mPresenter.getLoginStatus()){
+            if(is_Collect){
+                mPresenter.addCollectArticle(article_id);
+            }else{
+                mPresenter.cancelCollectArticle(article_id);
+            }
+        }else{
+            startActivity(new Intent(this,LoginActivity.class));
+        }
+
+//        if(is_Collect){
+//            is_Collect = false;
+//            mMenuItem.setTitle(getString(R.string.cancel_collect));
+//            mMenuItem.setIcon(R.mipmap.ic_toolbar_like_n);
+//            RxBus.getDefault().send(new CollectEvent(true));
+//
+//        }else{
+//            is_Collect = true;
+//            mMenuItem.setTitle(getString(R.string.collect));
+//            mMenuItem.setIcon(R.mipmap.ic_toolbar_like_p);
+//            RxBus.getDefault().send(new CollectEvent(false));
+//        }
     }
 
     private void systemBrowerEvent() {
-
-
+        startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(articleLink)));
     }
 
     private void unCommonSite(Menu menu) {
@@ -211,8 +224,22 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
 
     @Override
     public void showCollectArticleData(FeedArticleListData feedArticleListData) {
-
-
+            is_Collect = true;
+            mMenuItem.setTitle(getString(R.string.cancel_collect));
+            mMenuItem.setIcon(R.mipmap.ic_toolbar_like_p);
+            RxBus.getDefault().send(new CollectEvent(false));
+        //        if(is_Collect){
+//            is_Collect = false;
+//            mMenuItem.setTitle(getString(R.string.cancel_collect));
+//            mMenuItem.setIcon(R.mipmap.ic_toolbar_like_n);
+//            RxBus.getDefault().send(new CollectEvent(true));
+//
+//        }else{
+//            is_Collect = true;
+//            mMenuItem.setTitle(getString(R.string.collect));
+//            mMenuItem.setIcon(R.mipmap.ic_toolbar_like_p);
+//            RxBus.getDefault().send(new CollectEvent(false));
+//        }
 
     }
 
