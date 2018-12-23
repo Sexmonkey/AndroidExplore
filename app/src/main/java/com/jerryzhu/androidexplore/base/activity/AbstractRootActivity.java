@@ -36,7 +36,7 @@ public abstract  class AbstractRootActivity extends SupportActivity {
 
         ActivityCollector.getInstance().removeActivity(this);
 
-        if (mUnbinder == null) {
+        if (mUnbinder != null) {
             mUnbinder.unbind();
             mUnbinder = null;
         }

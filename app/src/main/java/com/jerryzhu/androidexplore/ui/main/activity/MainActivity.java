@@ -104,7 +104,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainBri
         supportActionBar.setDisplayShowTitleEnabled(false);
         commonToolbarTitleTv.setText(R.string.home_pager);
         StatusBarUtil.setStatusColor(getWindow(), ContextCompat.getColor(this, R.color.main_status_bar_blue), 1f);
-        commonToolbar.setNavigationOnClickListener(view -> onBackPressedSupport());
+        commonToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.this.onBackPressedSupport();
+            }
+        });
     }
 
 
@@ -141,7 +146,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainBri
 
     @Override
     public void showLogoutSuccess() {
-
+        showLogoutView();
     }
 
     @Override

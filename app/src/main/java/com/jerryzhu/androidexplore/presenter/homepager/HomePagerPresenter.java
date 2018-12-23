@@ -167,7 +167,7 @@ public class HomePagerPresenter extends BasePresenter<HomePagerBridge.View> impl
     public void addCollectArticle(int position, FeedArticleData feedArticleData) {
         addSubscribe(mDataManager.addCollectArticle(feedArticleData.getId())
                 .compose(RxUtils.rxObSchedulerHelper())
-                .compose(RxUtils.handleResult())
+                .compose(RxUtils.handleCollectResult())
                 .subscribeWith(new BaseObserver<FeedArticleListData>(mView,
                         AndroidExploreApp.getInstance().getString(R.string.collect_success)) {
                     @Override
@@ -185,7 +185,7 @@ public class HomePagerPresenter extends BasePresenter<HomePagerBridge.View> impl
     public void cancelCollectArticle(int position, FeedArticleData feedArticleData) {
         addSubscribe(mDataManager.cancelCollectArticle(feedArticleData.getId())
                 .compose(RxUtils.rxObSchedulerHelper())
-                .compose(RxUtils.handleResult())
+                .compose(RxUtils.handleCollectResult())
                 .subscribeWith(new BaseObserver<FeedArticleListData>(mView,
                         AndroidExploreApp.getInstance().getString(R.string.cancel_collect_fail),
                         false){

@@ -62,9 +62,26 @@ public interface HttpHelper {
      * http://www.wanandroid.com/lg/uncollect_originId/2333/json
      *
      *
-     * @param i
+     * @param
      * @param id article id
      * @return 取消收藏页面站内文章数据
      */
     Observable<BaseResponse<FeedArticleListData>> cancelCollectPageArticle(int id);
+
+    /**
+     * 退出登录
+     * http://www.wanandroid.com/user/logout/json
+     */
+    Observable<BaseResponse<LoginData>> logout();
+
+    /**
+     * 注册
+     * http://www.wanandroid.com/user/register
+     *
+     * @param username user name
+     * @param password password
+     * @param confirmPassword confirmPassword
+     * @return 登陆数据
+     */
+    Observable<BaseResponse<LoginData>> getRegisterdata(String username, String password, String confirmPassword);
 }

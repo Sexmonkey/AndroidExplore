@@ -1,9 +1,7 @@
 package com.jerryzhu.androidexplore.utils;
 
 import android.annotation.SuppressLint;
-
 import com.orhanobut.logger.Logger;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

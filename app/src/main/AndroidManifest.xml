@@ -41,6 +41,9 @@
         <activity android:name=".ui.main.activity.LoginActivity"/>
         <activity android:name=".ui.main.activity.AboutUsActivity"/>
         <activity android:name=".ui.main.activity.ArticleDetailActivity"/>
+        <activity
+            android:name=".ui.main.activity.RegisterActivity"
+            android:windowSoftInputMode="stateVisible" />
 
     </application>
 

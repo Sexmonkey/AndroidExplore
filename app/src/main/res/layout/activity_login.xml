@@ -43,11 +43,93 @@
             android:contentDescription="@null" />
 
         <EditText
+            android:id="@+id/login_user_name"
             android:layout_marginStart="@dimen/dp_6"
+            android:hint="please enter name"
             style="@style/style_circle_edit" />
 
     </LinearLayout>
 
+    <View
+        android:id="@+id/login_divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@id/login_account_group"
+        android:layout_marginStart="@dimen/dp_64"
+        android:layout_marginEnd="@dimen/dp_64"
+        android:background="@color/grey_divider" />
 
+    <LinearLayout
+        android:id="@+id/login_password_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_below="@id/login_account_group"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/dp_48"
+        android:layout_marginEnd="@dimen/dp_48"
+        android:padding="@dimen/dp_12"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_32"
+            android:src="@drawable/ic_password"
+            android:contentDescription="@null" />
+
+        <EditText
+            android:id="@+id/login_user_password"
+            android:layout_marginStart="@dimen/dp_6"
+            android:hint="please enter password"
+            android:inputType="textPassword"
+            style="@style/style_circle_edit" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/register_divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@id/login_password_group"
+        android:layout_marginStart="@dimen/dp_64"
+        android:layout_marginEnd="@dimen/dp_64"
+        android:background="@color/grey_divider" />
+
+
+    <LinearLayout
+        android:layout_below="@id/register_divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_32"
+        android:gravity="center_vertical">
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_below="@+id/register_divider"
+            style="@style/style_circle_btn"
+            android:background="@drawable/bg_conner_bottom_red"
+            android:text="@string/login_in" />
+
+
+        <TextView
+            android:id="@+id/text_or"
+            android:layout_below="@id/login_password_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:textColor="@color/comment_text"
+            android:textSize="@dimen/dp_16"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/or" />
+
+        <Button
+            android:id="@+id/btn_register"
+            style="@style/style_circle_btn"
+            android:layout_marginTop="@dimen/dp_12"
+            android:background="@drawable/bg_conner_bottom_blue"
+            android:text="@string/register" />
+
+    </LinearLayout>
 
 </RelativeLayout>

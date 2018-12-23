@@ -73,7 +73,6 @@ public interface GeekApis {
      * @return 注册数据
      */
     @POST("lg/collect/{id}/json")
-    @FormUrlEncoded
     Observable<BaseResponse<FeedArticleListData>> addCollectArticle(@Path("id") int id);
 
     /**
@@ -86,6 +85,26 @@ public interface GeekApis {
      */
     @POST("user/login")
     @FormUrlEncoded
-    Observable<BaseResponse<LoginData>> getLoginData(@Path("username") String username, @Path("password") String password);
+    Observable<BaseResponse<LoginData>> getLoginData(@Field("username") String username, @Field("password") String password);
 
+    /**
+     * 退出登录
+     * http://www.wanandroid.com/user/logout/json
+     * @return
+     */
+    @GET("user/logout/json")
+    Observable<BaseResponse<LoginData>> logout();
+
+    /**
+     * 注册
+     * http://www.wanandroid.com/user/register
+     *
+     * @param username user name
+     * @param password password
+     * @param confirmPassword confirmPassword
+     * @return 登陆数据
+     */
+    @POST("user/register")
+    @FormUrlEncoded
+    Observable<BaseResponse<LoginData>> getRegisterdata(@Field("username") String username,@Field("password") String password,@Field("repassword") String confirmPassword);
 }

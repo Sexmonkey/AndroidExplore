@@ -158,14 +158,14 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
 
         if(mPresenter.getLoginStatus()){
             if(is_Collect){
-                mPresenter.addCollectArticle(article_id);
+                mPresenter.cancelCollectArticle(article_id);
             }else{
                 if (is_Collect_page){
 
                     mPresenter.cancleCollectPageArticle(article_id);
 
                 }else{
-                    mPresenter.cancelCollectArticle(article_id);
+                    mPresenter.addCollectArticle(article_id);
                 }
             }
         }else{
@@ -225,7 +225,7 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
             is_Collect = true;
             mMenuItem.setTitle(getString(R.string.cancel_collect));
             mMenuItem.setIcon(R.mipmap.ic_toolbar_like_p);
-            CommonUtils.showSnackMessage(this,getString(R.string.collect_success));
+            CommonUtils.showMessage(this,getString(R.string.collect_success));
 
     }
 
@@ -236,7 +236,7 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
             mMenuItem.setTitle(getString(R.string.collect));
         }
         mMenuItem.setIcon(R.mipmap.ic_toolbar_like_n);
-        CommonUtils.showSnackMessage(this,getString(R.string.cancel_collect_success));
+        CommonUtils.showMessage(this,getString(R.string.cancel_collect_success));
 
     }
 
