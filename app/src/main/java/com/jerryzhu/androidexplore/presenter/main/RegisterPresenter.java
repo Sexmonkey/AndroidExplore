@@ -9,7 +9,6 @@ import com.jerryzhu.androidexplore.core.DataManager;
 import com.jerryzhu.androidexplore.core.bean.mainpager.login.LoginData;
 import com.jerryzhu.androidexplore.utils.RxUtils;
 import com.jerryzhu.androidexplore.widget.BaseObserver;
-
 import javax.inject.Inject;
 
 public class RegisterPresenter  extends BasePresenter<RegisterBridge.View> implements RegisterBridge.Presenter {

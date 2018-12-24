@@ -83,7 +83,7 @@ public abstract class AbstractRootFragment extends SupportFragment {
     public void onDestroy() {
         super.onDestroy();
 
-        RefWatcher refWatcher = AndroidExploreApp.getRefWatcher(_mActivity);
+        RefWatcher refWatcher = AndroidExploreApp.getInstance().getRefWatcher(_mActivity);
         refWatcher.watch(this);
 
     }

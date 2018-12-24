@@ -10,10 +10,13 @@ import com.jerryzhu.androidexplore.core.DataManager;
 import com.jerryzhu.androidexplore.core.bean.BaseResponse;
 import com.jerryzhu.androidexplore.core.bean.mainpager.login.LoginData;
 import com.jerryzhu.androidexplore.core.event.LoginEvent;
+import com.jerryzhu.androidexplore.utils.CommonAlertDialog;
 import com.jerryzhu.androidexplore.utils.RxUtils;
 import com.jerryzhu.androidexplore.widget.BaseObserver;
 
 import javax.inject.Inject;
+
+import io.reactivex.functions.Consumer;
 
 public class MainPresenter extends BasePresenter<MainBridge.View> implements MainBridge.Presenter {
 
@@ -23,6 +26,25 @@ public class MainPresenter extends BasePresenter<MainBridge.View> implements Mai
     public MainPresenter(DataManager dataManager) {
         super(dataManager);
         mDataManager = dataManager;
+    }
+
+    @Override
+    public void attachView(MainBridge.View view) {
+        super.attachView(view);
+        registerEvent();
+    }
+
+    private void registerEvent() {
+        addSubscribe(RxBus.getDefault().toFlowable(LoginEvent.class).subscribe(new Consumer<LoginEvent>() {
+            @Override
+            public void accept(LoginEvent loginEvent) throws Exception {
+                if(loginEvent.isLogined()){
+                    mView.showLoginView();
+                }else{
+                    mView.showLogoutSuccess();
+                }
+            }
+        }));
     }
 
     @Override
@@ -49,6 +71,7 @@ public class MainPresenter extends BasePresenter<MainBridge.View> implements Mai
                         setLoginAccount("");
                         setLoginPassword("");
                         mView.showLogoutSuccess();
+                        CommonAlertDialog.newInstance().cancelDialog(true);
                         RxBus.getDefault().send(new LoginEvent(false));
                     }
                 }));

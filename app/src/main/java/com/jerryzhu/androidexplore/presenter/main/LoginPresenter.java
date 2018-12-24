@@ -39,7 +39,6 @@ public class LoginPresenter extends BasePresenter<LoginBridge.View> implements L
                         setLoginPassword(password);
                         setLoginStatus(true);
                         RxBus.getDefault().send(new LoginEvent(true));
-
                         mView.showLoginSuccess();
 
                     }

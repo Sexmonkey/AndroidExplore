@@ -1,6 +1,5 @@
 package com.jerryzhu.androidexplore.base.presenter;
 
-
 import com.jerryzhu.androidexplore.base.view.AbstractRootView;
 import com.jerryzhu.androidexplore.core.DataManager;
 import io.reactivex.disposables.CompositeDisposable;

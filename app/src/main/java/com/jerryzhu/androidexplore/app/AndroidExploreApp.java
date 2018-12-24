@@ -132,7 +132,7 @@ public class AndroidExploreApp extends Application implements HasActivityInjecto
         return instance;
     }
 
-    public static RefWatcher getRefWatcher(Context context){
+    public RefWatcher getRefWatcher(Context context){
 
         AndroidExploreApp applicationContext = (AndroidExploreApp) context.getApplicationContext();
 
