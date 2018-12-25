@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import com.jerryzhu.androidexplore.base.presenter.AbstractRootPresenter;
 import com.jerryzhu.androidexplore.base.view.AbstractRootView;
 import com.jerryzhu.androidexplore.utils.CommonUtils;
+import dagger.android.support.AndroidSupportInjection;
 
 public abstract class BaseDialogFragment<T extends AbstractRootPresenter> extends AbstractRootDialogFragment implements AbstractRootView {
 
@@ -13,6 +14,8 @@ public abstract class BaseDialogFragment<T extends AbstractRootPresenter> extend
 
     @Override
     public void onAttach(Context context) {
+
+        AndroidSupportInjection.inject(this);
         super.onAttach(context);
     }
 
@@ -35,7 +38,6 @@ public abstract class BaseDialogFragment<T extends AbstractRootPresenter> extend
 
         if(mPresenter != null){
             mPresenter.detachView();
-            mPresenter = null;
         }
 
         super.onDestroyView();
@@ -47,10 +49,16 @@ public abstract class BaseDialogFragment<T extends AbstractRootPresenter> extend
     }
 
     @Override
-    public void useNightMode(boolean useNightMode) {}
+    public void useNightMode(boolean useNightMode) {
+
+    }
 
     @Override
     public void showErrorMessage(String msg) {
+
+        if (getActivity() != null){
+           CommonUtils.showMessage(getActivity(),msg);
+        }
 
     }
 

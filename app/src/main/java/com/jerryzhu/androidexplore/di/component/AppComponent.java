@@ -1,8 +1,10 @@
 package com.jerryzhu.androidexplore.di.component;
 
 import com.jerryzhu.androidexplore.app.AndroidExploreApp;
+import com.jerryzhu.androidexplore.base.fragment.AbstractRootDialogFragment;
 import com.jerryzhu.androidexplore.core.DataManager;
 import com.jerryzhu.androidexplore.di.module.AbstractAllActivityModule;
+import com.jerryzhu.androidexplore.di.module.AbstractAllDialogFragmentModule;
 import com.jerryzhu.androidexplore.di.module.AbstractAllFragmentModule;
 import com.jerryzhu.androidexplore.di.module.AppModlue;
 import com.jerryzhu.androidexplore.di.module.HttpModule;
@@ -24,6 +26,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         AndroidSupportInjectionModule.class,
         AbstractAllActivityModule.class,
         AbstractAllFragmentModule.class,
+        AbstractAllDialogFragmentModule.class,
         AppModlue.class,
         HttpModule.class})
 public interface AppComponent {
