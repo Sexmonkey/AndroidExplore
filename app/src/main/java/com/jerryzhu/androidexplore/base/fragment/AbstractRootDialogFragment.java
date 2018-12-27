@@ -14,7 +14,8 @@ import butterknife.Unbinder;
 
 public abstract class AbstractRootDialogFragment extends DialogFragment {
 
-    private View mView;
+    protected
+    View mView;
     private Unbinder mUnbinder;
 
     @Nullable

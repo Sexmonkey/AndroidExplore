@@ -34,12 +34,13 @@ public abstract  class AbstractRootActivity extends SupportActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        ActivityCollector.getInstance().removeActivity(this);
-
         if (mUnbinder != null) {
             mUnbinder.unbind();
             mUnbinder = null;
         }
+
+        ActivityCollector.getInstance().removeActivity(this);
+
     }
 
 

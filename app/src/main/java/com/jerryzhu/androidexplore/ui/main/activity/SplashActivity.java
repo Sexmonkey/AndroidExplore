@@ -2,6 +2,7 @@ package com.jerryzhu.androidexplore.ui.main.activity;
 
 import android.animation.Animator;
 import android.content.Intent;
+import android.os.Handler;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.jerryzhu.androidexplore.R;
@@ -38,6 +39,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     LottieAnimationView nineAnimation;
     @BindView(R.id.ten_animation)
     LottieAnimationView tenAnimation;
+
 
     @Override
     protected void initDataAndEvent() {
@@ -82,6 +84,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
 
     }
 
+
     @Override
     protected void initToolBar() {
 
@@ -90,6 +93,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
             return;
         }
         StatusBarUtil.immersive(this);
+
     }
 
     @Override

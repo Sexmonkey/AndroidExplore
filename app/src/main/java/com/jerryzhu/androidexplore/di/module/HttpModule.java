@@ -106,9 +106,9 @@ public class HttpModule {
             }
         };
 //      设置缓存
+        builder.cache(cache);
         builder.addNetworkInterceptor(interceptor);
         builder.addInterceptor(interceptor);
-        builder.cache(cache);
 //      设置超时
         builder.connectTimeout(10,TimeUnit.SECONDS);
         builder.readTimeout(20,TimeUnit.SECONDS);
@@ -130,4 +130,6 @@ public class HttpModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
+
+
 }

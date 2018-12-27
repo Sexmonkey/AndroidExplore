@@ -10,7 +10,7 @@ import dagger.android.support.AndroidSupportInjection;
 
 public abstract class BaseDialogFragment<T extends AbstractRootPresenter> extends AbstractRootDialogFragment implements AbstractRootView {
 
-    T mPresenter;
+    protected T mPresenter;
 
     @Override
     public void onAttach(Context context) {
