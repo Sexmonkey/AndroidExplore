@@ -4,6 +4,7 @@ import com.jerryzhu.androidexplore.core.bean.mainpager.banner.BannerData;
 import com.jerryzhu.androidexplore.core.bean.BaseResponse;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.login.LoginData;
+import com.jerryzhu.androidexplore.core.bean.mainpager.useful.UsefulData;
 import com.jerryzhu.androidexplore.core.db.DbHelper;
 import com.jerryzhu.androidexplore.core.http.HttpHelper;
 import com.jerryzhu.androidexplore.core.prefs.PreferenceHelper;
@@ -174,5 +175,9 @@ public class DataManager implements HttpHelper,DbHelper,PreferenceHelper {
 
         return mHttpHelper.getRegisterdata(username,password,confirmPassword);
 
+    }
+
+    public Observable<BaseResponse<List<UsefulData>>> getUserfulSites() {
+        return mHttpHelper.getUserfulSites();
     }
 }

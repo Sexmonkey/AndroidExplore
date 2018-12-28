@@ -4,6 +4,7 @@ import com.jerryzhu.androidexplore.core.bean.BaseResponse;
 import com.jerryzhu.androidexplore.core.bean.mainpager.banner.BannerData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.login.LoginData;
+import com.jerryzhu.androidexplore.core.bean.mainpager.useful.UsefulData;
 import com.jerryzhu.androidexplore.core.http.exception.GeekApis;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 
 public class HttpHelperImpl implements HttpHelper {
+
 
     private GeekApis mGeekApis;
 
@@ -61,5 +63,10 @@ public class HttpHelperImpl implements HttpHelper {
     public Observable<BaseResponse<LoginData>> getRegisterdata(String username, String password, String confirmPassword) {
 
         return mGeekApis.getRegisterdata(username,password,confirmPassword);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<UsefulData>>> getUserfulSites() {
+        return mGeekApis.getUsefulData();
     }
 }

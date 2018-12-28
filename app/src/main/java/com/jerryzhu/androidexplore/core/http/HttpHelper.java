@@ -4,6 +4,8 @@ import com.jerryzhu.androidexplore.core.bean.mainpager.banner.BannerData;
 import com.jerryzhu.androidexplore.core.bean.BaseResponse;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.login.LoginData;
+import com.jerryzhu.androidexplore.core.bean.mainpager.useful.UsefulData;
+
 import java.util.List;
 import io.reactivex.Observable;
 
@@ -84,4 +86,12 @@ public interface HttpHelper {
      * @return 登陆数据
      */
     Observable<BaseResponse<LoginData>> getRegisterdata(String username, String password, String confirmPassword);
+
+    /**
+     * 常用网站
+     * http://www.wanandroid.com/friend/json
+     *
+     * @return 常用网站数据
+     */
+    Observable<BaseResponse<List<UsefulData>>> getUserfulSites();
 }

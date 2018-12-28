@@ -10,6 +10,7 @@ import com.jerryzhu.androidexplore.app.AndroidExploreApp;
 import com.jerryzhu.androidexplore.app.Constants;
 import com.jerryzhu.androidexplore.core.http.exception.GeekApis;
 import com.jerryzhu.androidexplore.di.qualifier.WanAndroidUrl;
+import com.jerryzhu.androidexplore.utils.AnimatorUtil;
 import com.jerryzhu.androidexplore.utils.CommonUtils;
 import java.io.File;
 import java.io.IOException;
@@ -78,37 +79,11 @@ public class HttpModule {
         }
         File cacheFile = new File(Constants.PATH_CACHE);
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 60);
-        Interceptor interceptor = new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                if (!CommonUtils.isNetworkConnected()) {
-                    request.newBuilder().cacheControl(CacheControl.FORCE_CACHE).build();
-                }
-                Response response = chain.proceed(request);
-                if(CommonUtils.isNetworkConnected()){
-//                  有网络时不缓存，最大保存时长为0
-                    int maxAge = 0;
-                    response.newBuilder()
-                            .removeHeader("Pragma")
-                            .header("Cache-Control","public, max-age="+ maxAge)
-                            .build();
-                }else{
-//                   无网络时缓存最大时长为四周
-                    int maxStale = 60 * 60 * 24 * 28;
-                    response.newBuilder()
-                            .removeHeader("Pragma")
-                            .header("Cache-Control","public, only-if-cached, max-stale="+ maxStale)
-                            .build();
 
-                }
-                return response;
-            }
-        };
 //      设置缓存
         builder.cache(cache);
-        builder.addNetworkInterceptor(interceptor);
-        builder.addInterceptor(interceptor);
+        builder.addNetworkInterceptor(REWRITE_RESPONSE_INTERCEPTOR);
+        builder.addInterceptor(REWRITE_RESPONSE_INTERCEPTOR_OFFLINE);
 //      设置超时
         builder.connectTimeout(10,TimeUnit.SECONDS);
         builder.readTimeout(20,TimeUnit.SECONDS);
@@ -130,6 +105,39 @@ public class HttpModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
+
+
+    private final Interceptor REWRITE_RESPONSE_INTERCEPTOR = new Interceptor() {
+        @Override
+        public okhttp3.Response intercept(Chain chain) throws IOException {
+            okhttp3.Response originalResponse = chain.proceed(chain.request());
+            String cacheControl = originalResponse.header("Cache-Control");
+            if (cacheControl == null || cacheControl.contains("no-store") || cacheControl.contains("no-cache") ||
+                    cacheControl.contains("must-revalidate") || cacheControl.contains("max-age=0")) {
+                return originalResponse.newBuilder()
+                        .removeHeader("Pragma")
+                        .header("Cache-Control", "public, max-age=" + 5000)
+                        .build();
+            } else {
+                return originalResponse;
+            }
+        }
+    };
+
+    private final Interceptor REWRITE_RESPONSE_INTERCEPTOR_OFFLINE = new Interceptor() {
+        @Override
+        public okhttp3.Response intercept(Chain chain) throws IOException {
+            Request request = chain.request();
+            if (!CommonUtils.isNetworkConnected()) {
+                request = request.newBuilder()
+                        .removeHeader("Pragma")
+                        .header("Cache-Control", "public, only-if-cached")
+                        .build();
+            }
+            return chain.proceed(request);
+        }
+    };
+
 
 
 }

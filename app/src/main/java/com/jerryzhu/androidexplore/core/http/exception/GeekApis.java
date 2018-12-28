@@ -4,6 +4,8 @@ import com.jerryzhu.androidexplore.core.bean.BaseResponse;
 import com.jerryzhu.androidexplore.core.bean.mainpager.banner.BannerData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.login.LoginData;
+import com.jerryzhu.androidexplore.core.bean.mainpager.useful.UsefulData;
+
 import java.util.List;
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -107,4 +109,15 @@ public interface GeekApis {
     @POST("user/register")
     @FormUrlEncoded
     Observable<BaseResponse<LoginData>> getRegisterdata(@Field("username") String username,@Field("password") String password,@Field("repassword") String confirmPassword);
+
+    /**
+     * 常用网站
+     * http://www.wanandroid.com/friend/json
+     *
+     * @return 常用网站数据
+     */
+    @GET("friend/json")
+    Observable<BaseResponse<List<UsefulData>>> getUsefulData();
+
+
 }

@@ -28,6 +28,7 @@ import com.jerryzhu.androidexplore.ui.hierarchy.fragment.HierarchyPagerFragment;
 import com.jerryzhu.androidexplore.ui.homepager.fragment.HomePagerFragment;
 import com.jerryzhu.androidexplore.ui.main.fragment.CollectFragment;
 import com.jerryzhu.androidexplore.ui.main.fragment.SettingFragment;
+import com.jerryzhu.androidexplore.ui.main.fragment.UsageDialogFragment;
 import com.jerryzhu.androidexplore.ui.navigation.fragment.NavigationPagerFragment;
 import com.jerryzhu.androidexplore.ui.project.fragment.ProjectPagerFragment;
 import com.jerryzhu.androidexplore.ui.wx.fragment.WXPagerFragment;
@@ -47,6 +48,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainBri
     private NavigationPagerFragment mNavigationPagerFragment;
     private ProjectPagerFragment mProjectPagerFragment;
     private WXPagerFragment mWxPagerFragment;
+    private UsageDialogFragment mUsageDialogFragment;
     private int lastFragmentIndex;
 
     @BindView(R.id.common_toolbar_title_tv)
@@ -408,7 +410,16 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainBri
         switch (item.getItemId()) {
 
             case R.id.action_usage:
-                Toast.makeText(this,"action_usage",Toast.LENGTH_LONG).show();
+
+                if (mUsageDialogFragment == null){
+
+                    mUsageDialogFragment = new UsageDialogFragment();
+
+                }
+                if(!isDestroyed() && mUsageDialogFragment.isAdded()){
+                    mUsageDialogFragment.dismiss();
+                }
+                mUsageDialogFragment.show(getSupportFragmentManager(),"UsageDialogFragment");
 
                 break;
             case R.id.action_search:

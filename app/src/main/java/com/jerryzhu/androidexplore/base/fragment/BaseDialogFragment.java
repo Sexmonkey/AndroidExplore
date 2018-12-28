@@ -6,10 +6,14 @@ import android.support.annotation.Nullable;
 import com.jerryzhu.androidexplore.base.presenter.AbstractRootPresenter;
 import com.jerryzhu.androidexplore.base.view.AbstractRootView;
 import com.jerryzhu.androidexplore.utils.CommonUtils;
+
+import javax.inject.Inject;
+
 import dagger.android.support.AndroidSupportInjection;
 
 public abstract class BaseDialogFragment<T extends AbstractRootPresenter> extends AbstractRootDialogFragment implements AbstractRootView {
 
+    @Inject
     protected T mPresenter;
 
     @Override
@@ -17,12 +21,18 @@ public abstract class BaseDialogFragment<T extends AbstractRootPresenter> extend
 
         AndroidSupportInjection.inject(this);
         super.onAttach(context);
+
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter.attachView(this);
+
+        if(mPresenter != null){
+
+            mPresenter.attachView(this);
+        }
+
     }
 
     @Override
