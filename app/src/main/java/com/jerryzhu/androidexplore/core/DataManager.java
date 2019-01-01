@@ -12,7 +12,6 @@ import com.jerryzhu.androidexplore.core.prefs.PreferenceHelper;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * author: jerryzhu

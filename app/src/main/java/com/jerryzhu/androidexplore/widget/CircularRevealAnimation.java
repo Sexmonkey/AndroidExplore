@@ -49,26 +49,11 @@ public class CircularRevealAnimation {
         int tvX = (int)(tvLocation[0] + triggerView.getWidth() * 0.5);
         int tvY = (int)(tvLocation[1] + triggerView.getHeight() * 0.5);
 
-        System.out.println("SSStvLocation[0]==="+tvLocation[0]);
-        System.out.println("SSSanimView.getWidth()==="+triggerView.getWidth());
-        System.out.println("SSStvX==="+tvX);
-
-        System.out.println("SSStvLocation[1]==="+tvLocation[1]);
-        System.out.println("SSSanimView.getHeight()==="+triggerView.getHeight());
-        System.out.println("SSStvY==="+tvY);
 
         int [] svLocation = {0,0};
         showView.getLocationInWindow(svLocation);
         int svX = (int)(svLocation[0] + showView.getWidth() * 0.5);
         int svY = (int)(svLocation[1] + showView.getHeight() * 0.5);
-
-        System.out.println("SSSavLocation[0]==="+svLocation[0]);
-        System.out.println("SSSanimView.getWidth()==="+showView.getWidth());
-        System.out.println("SSSavX==="+svX);
-
-        System.out.println("SSSavLocation[1]==="+svLocation[1]);
-        System.out.println("SSSanimView.getHeight()==="+showView.getHeight());
-        System.out.println("SSSavY==="+svY);
 
         int rippleW;
         if(tvX < svX){
@@ -77,7 +62,6 @@ public class CircularRevealAnimation {
             rippleW = tvX - svLocation[0];
         }
 
-        System.out.println("SSSrippleW===="+rippleW);
 
         int rippleH;
         if(tvY < svY){
@@ -86,7 +70,7 @@ public class CircularRevealAnimation {
             rippleH = tvY - svLocation[1];
         }
 
-        float maxRadius = (float) Math.sqrt((double) (rippleW * rippleW + rippleH * rippleH));
+        float maxRadius = (float) Math.sqrt((double) (svX * svX + svY * svY));
         float startRadius;
         float endRadius;
 
@@ -98,9 +82,9 @@ public class CircularRevealAnimation {
             endRadius = 0;
         }
 
-        Animator animator = ViewAnimationUtils.createCircularReveal(showView, tvX, tvY, startRadius, endRadius);
+        Animator animator = ViewAnimationUtils.createCircularReveal(showView, svX, svY, startRadius, endRadius);
         showView.setVisibility(View.VISIBLE);
-        animator.setDuration(1000);
+        animator.setDuration(500);
         animator.setInterpolator(new DecelerateInterpolator());
 
         animator.addListener(new Animator.AnimatorListener() {

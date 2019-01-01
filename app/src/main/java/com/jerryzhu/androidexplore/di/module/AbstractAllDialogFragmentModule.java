@@ -1,6 +1,7 @@
 package com.jerryzhu.androidexplore.di.module;
 
 import com.jerryzhu.androidexplore.di.component.BaseDialogFragmentComponent;
+import com.jerryzhu.androidexplore.ui.main.fragment.SearchDialogFragment;
 import com.jerryzhu.androidexplore.ui.main.fragment.UsageDialogFragment;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -11,4 +12,8 @@ public abstract class AbstractAllDialogFragmentModule {
 
     @ContributesAndroidInjector(modules = {UsageDialogFragmentModule.class})
     abstract UsageDialogFragment contributesUsageDialogFragmentInjector();
+
+    @ContributesAndroidInjector(modules = {SearchDialogFragment.class})
+    abstract SearchDialogFragment contributesSearchDialogFragmentInjector();
+
 }

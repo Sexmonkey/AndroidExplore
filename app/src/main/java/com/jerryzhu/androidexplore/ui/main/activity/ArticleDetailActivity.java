@@ -31,7 +31,6 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import java.lang.reflect.Method;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> implements ArticleDetailBridge.View {
 

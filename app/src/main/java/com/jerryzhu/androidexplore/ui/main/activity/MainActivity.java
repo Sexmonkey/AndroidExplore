@@ -27,6 +27,7 @@ import com.jerryzhu.androidexplore.presenter.main.MainPresenter;
 import com.jerryzhu.androidexplore.ui.hierarchy.fragment.HierarchyPagerFragment;
 import com.jerryzhu.androidexplore.ui.homepager.fragment.HomePagerFragment;
 import com.jerryzhu.androidexplore.ui.main.fragment.CollectFragment;
+import com.jerryzhu.androidexplore.ui.main.fragment.SearchDialogFragment;
 import com.jerryzhu.androidexplore.ui.main.fragment.SettingFragment;
 import com.jerryzhu.androidexplore.ui.main.fragment.UsageDialogFragment;
 import com.jerryzhu.androidexplore.ui.navigation.fragment.NavigationPagerFragment;
@@ -66,6 +67,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainBri
     @BindView(R.id.fragment_group)
     FrameLayout fragmentGroup;
     private TextView mLoginTv;
+    private SearchDialogFragment mSearchDialogFragment;
 
 
     @Override
@@ -423,7 +425,18 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainBri
 
                 break;
             case R.id.action_search:
-                Toast.makeText(this,"action_search",Toast.LENGTH_LONG).show();
+
+                if(mUsageDialogFragment == null){
+
+                    mSearchDialogFragment = new SearchDialogFragment();
+
+                }
+
+                if(!isDestroyed() && mSearchDialogFragment.isAdded()){
+                    mSearchDialogFragment.dismiss();
+                }
+
+                mSearchDialogFragment.show(getSupportFragmentManager(),"SearchDialogFragment");
 
                 break;
         }

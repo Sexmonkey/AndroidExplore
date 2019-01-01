@@ -10,7 +10,6 @@ import com.jerryzhu.androidexplore.component.RxBus;
 import com.jerryzhu.androidexplore.core.DataManager;
 import com.jerryzhu.androidexplore.core.bean.mainpager.login.LoginData;
 import com.jerryzhu.androidexplore.core.event.LoginEvent;
-import com.jerryzhu.androidexplore.utils.CommonUtils;
 import com.jerryzhu.androidexplore.utils.RxUtils;
 import com.jerryzhu.androidexplore.widget.BaseObserver;
 

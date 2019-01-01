@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@color/colorCard"
+    app:layout_scrollFlags="enterAlways|scroll">
+
+    <ImageButton
+        android:id="@+id/search_toolbar_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:background="@android:color/transparent"
+        android:contentDescription="@null"
+        android:src="@drawable/seclector_back_arrow_bg" />
+    <TextView
+        android:id="@+id/tv_search"
+        android:layout_width="@dimen/dp_54"
+        android:layout_height="@dimen/dp_28"
+        android:background="@drawable/search_bg"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:layout_gravity="end"
+        android:gravity="center"
+        android:contentDescription="@null"
+        android:textSize="@dimen/dp_12"
+        android:textColor="@color/white"
+        android:text="@string/action_search"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_12"
+            android:inputType="text"
+            android:labelFor="@+id/edit_search"
+            android:textColor="@color/title_black"
+            android:textSize="@dimen/dp_14"
+            android:paddingStart="@dimen/dp_28"
+            android:paddingEnd="@dimen/dp_1"
+            android:textCursorDrawable="@drawable/shape_cursor" />
+
+        <TextView
+            android:id="@+id/search_tint_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_tint"
+            android:textSize="@dimen/dp_14"
+            android:textColor="@color/grey_search"
+            android:layout_centerVertical="true"
+            android:drawableStart="@drawable/ic_search"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/dp_5" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.Toolbar>
