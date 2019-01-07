@@ -13,38 +13,40 @@ import com.jerryzhu.androidexplore.R;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleData;
 import java.util.List;
 
-public class HomePageraAapter extends BaseQuickAdapter<FeedArticleData,BaseViewHolder> {
+public class SearchListAdapter extends BaseQuickAdapter<FeedArticleData,BaseViewHolder> {
 
     boolean isCollectPage = false;
 
     boolean isNightMode = false;
 
-    boolean isHomePage = false;
+    boolean isSearchPage = false;
 
     public void isCollectPage() {
         isCollectPage = true;
         notifyDataSetChanged();
     }
 
-    public void isNightMode() {
-        isNightMode = true;
-        notifyDataSetChanged();
-    }
-
-    public void isHomePage() {
-        isHomePage = true;
+    public void isNightMode(boolean isNightMode) {
+        this.isNightMode = isNightMode;
         notifyDataSetChanged();
     }
 
 
+    public void isSearchPage(){
+        isSearchPage = true;
+        notifyDataSetChanged();
+    }
 
-    public HomePageraAapter(int layoutResId, @Nullable List<FeedArticleData> data) {
+
+
+    public SearchListAdapter(int layoutResId, @Nullable List<FeedArticleData> data) {
         super(layoutResId, data);
     }
 
 
     @Override
     protected void convert(BaseViewHolder helper, FeedArticleData article) {
+
         if(!TextUtils.isEmpty(article.getTitle())){
             helper.setText(R.id.item_home_pager_title,Html.fromHtml(article.getTitle()));
         }
@@ -70,7 +72,7 @@ public class HomePageraAapter extends BaseQuickAdapter<FeedArticleData,BaseViewH
         if (!TextUtils.isEmpty(article.getNiceDate())) {
             helper.setText(R.id.item_home_pager_niceDate, article.getNiceDate());
         }
-        if (isHomePage) {
+        if (isSearchPage) {
             CardView cardView = helper.getView(R.id.item_home_pager_group);
             cardView.setForeground(null);
             if (isNightMode) {

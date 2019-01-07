@@ -4,6 +4,7 @@ import com.jerryzhu.androidexplore.core.bean.mainpager.banner.BannerData;
 import com.jerryzhu.androidexplore.core.bean.BaseResponse;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.login.LoginData;
+import com.jerryzhu.androidexplore.core.bean.mainpager.search.TopSearchData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.useful.UsefulData;
 
 import java.util.List;
@@ -94,4 +95,14 @@ public interface HttpHelper {
      * @return 常用网站数据
      */
     Observable<BaseResponse<List<UsefulData>>> getUserfulSites();
+
+    /**
+     * 热搜
+     * http://www.wanandroid.com//hotkey/json
+     *
+     * @return 热门搜索数据
+     */
+    Observable<BaseResponse<List<TopSearchData>>> getTopSearchData();
+
+    Observable<BaseResponse<FeedArticleListData>> getSearchList(int page, String k);
 }

@@ -4,6 +4,7 @@ import com.jerryzhu.androidexplore.core.bean.mainpager.banner.BannerData;
 import com.jerryzhu.androidexplore.core.bean.BaseResponse;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.login.LoginData;
+import com.jerryzhu.androidexplore.core.bean.mainpager.search.TopSearchData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.useful.UsefulData;
 import com.jerryzhu.androidexplore.core.dao.HistoryData;
 import com.jerryzhu.androidexplore.core.db.DbHelper;
@@ -13,6 +14,7 @@ import com.jerryzhu.androidexplore.core.prefs.PreferenceHelper;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * author: jerryzhu
@@ -183,8 +185,30 @@ public class DataManager implements HttpHelper,DbHelper,PreferenceHelper {
     }
 
     @Override
+    public Observable<BaseResponse<List<TopSearchData>>> getTopSearchData() {
+        return mHttpHelper.getTopSearchData();
+    }
+
+    @Override
     public List<HistoryData> addHistoryData(String data) {
 
         return mDbHelper.addHistoryData(data);
+    }
+
+    @Override
+    public void clearHistoryData() {
+
+        mDbHelper.clearHistoryData();
+
+    }
+
+    @Override
+    public List<HistoryData> loadAllHistoryData() {
+        return mDbHelper.loadAllHistoryData();
+    }
+
+    @Override
+    public Observable<BaseResponse<FeedArticleListData>> getSearchList(int page, String k) {
+        return mHttpHelper.getSearchList(page,k);
     }
 }

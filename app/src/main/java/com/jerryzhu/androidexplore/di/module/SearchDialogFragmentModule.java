@@ -2,5 +2,6 @@ package com.jerryzhu.androidexplore.di.module;
 
 import dagger.Module;
 
-public class SearchFragmentModule {
+@Module
+public class SearchDialogFragmentModule {
 }

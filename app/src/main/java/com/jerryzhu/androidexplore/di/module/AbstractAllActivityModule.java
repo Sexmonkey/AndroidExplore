@@ -4,6 +4,7 @@ import com.jerryzhu.androidexplore.di.component.BaseActivityComponent;
 import com.jerryzhu.androidexplore.ui.main.activity.ArticleDetailActivity;
 import com.jerryzhu.androidexplore.ui.main.activity.LoginActivity;
 import com.jerryzhu.androidexplore.ui.main.activity.MainActivity;
+import com.jerryzhu.androidexplore.ui.main.activity.SearchListActivity;
 import com.jerryzhu.androidexplore.ui.main.activity.SplashActivity;
 import com.jerryzhu.androidexplore.ui.main.activity.RegisterActivity;
 import dagger.Module;
@@ -26,5 +27,9 @@ public abstract class AbstractAllActivityModule {
 
     @ContributesAndroidInjector(modules = {RegisterActivityModule.class})
     abstract RegisterActivity contributesRegisterActivityInjector();
+
+
+    @ContributesAndroidInjector(modules = {SearchListActivityModule.class})
+    abstract SearchListActivity contributesSearchListActivityInjector();
 
 }

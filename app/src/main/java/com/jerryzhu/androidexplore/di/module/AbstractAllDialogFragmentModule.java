@@ -13,7 +13,7 @@ public abstract class AbstractAllDialogFragmentModule {
     @ContributesAndroidInjector(modules = {UsageDialogFragmentModule.class})
     abstract UsageDialogFragment contributesUsageDialogFragmentInjector();
 
-    @ContributesAndroidInjector(modules = {SearchDialogFragment.class})
+    @ContributesAndroidInjector(modules = {SearchDialogFragmentModule.class})
     abstract SearchDialogFragment contributesSearchDialogFragmentInjector();
 
 }

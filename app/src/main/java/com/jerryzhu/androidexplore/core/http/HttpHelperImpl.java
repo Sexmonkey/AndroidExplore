@@ -4,6 +4,7 @@ import com.jerryzhu.androidexplore.core.bean.BaseResponse;
 import com.jerryzhu.androidexplore.core.bean.mainpager.banner.BannerData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.login.LoginData;
+import com.jerryzhu.androidexplore.core.bean.mainpager.search.TopSearchData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.useful.UsefulData;
 import com.jerryzhu.androidexplore.core.http.exception.GeekApis;
 
@@ -68,5 +69,15 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Observable<BaseResponse<List<UsefulData>>> getUserfulSites() {
         return mGeekApis.getUsefulData();
+    }
+
+    @Override
+    public Observable<BaseResponse<List<TopSearchData>>> getTopSearchData() {
+        return mGeekApis.getTopSearchData();
+    }
+
+    @Override
+    public Observable<BaseResponse<FeedArticleListData>> getSearchList(int page, String k) {
+        return mGeekApis.getSearchList(page,k);
     }
 }

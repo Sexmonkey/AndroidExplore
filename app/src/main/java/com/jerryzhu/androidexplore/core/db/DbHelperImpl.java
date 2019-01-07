@@ -52,6 +52,18 @@ public class DbHelperImpl implements DbHelper {
         return mHistoryDataList;
     }
 
+    @Override
+    public void clearHistoryData() {
+
+        mDaoSession.getHistoryDataDao().deleteAll();
+
+    }
+
+    @Override
+    public List<HistoryData> loadAllHistoryData() {
+        return mDaoSession.getHistoryDataDao().loadAll();
+    }
+
     /**
      * 历史数据前移
      *

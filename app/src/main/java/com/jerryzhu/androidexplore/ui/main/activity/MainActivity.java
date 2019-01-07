@@ -37,6 +37,8 @@ import com.jerryzhu.androidexplore.utils.BottomNavigationViewHelper;
 import com.jerryzhu.androidexplore.utils.CommonAlertDialog;
 import com.jerryzhu.androidexplore.utils.CommonUtils;
 import com.jerryzhu.androidexplore.utils.StatusBarUtil;
+import com.orhanobut.logger.Logger;
+
 import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -28,7 +28,7 @@ public abstract class BaseRootFragment<T extends BasePresenter> extends BaseFrag
         }
         mNormalView = getView().findViewById(R.id.normal_view);
         if (mNormalView == null) {
-            throw new IllegalStateException("The subclass of RootActivity must contain a View's id named normal_view");
+            throw new IllegalStateException("The subclass of BaseRootFragment must contain a View's id named normal_view");
         }
         if(!(mNormalView.getParent() instanceof ViewGroup)){
 

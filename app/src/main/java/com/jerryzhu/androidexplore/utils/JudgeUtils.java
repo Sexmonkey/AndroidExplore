@@ -1,11 +1,15 @@
 package com.jerryzhu.androidexplore.utils;
 
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.support.v4.app.FragmentActivity;
+
 import com.jerryzhu.androidexplore.app.Constants;
 import com.jerryzhu.androidexplore.ui.main.activity.ArticleDetailActivity;
+import com.jerryzhu.androidexplore.ui.main.activity.SearchListActivity;
 
 public class JudgeUtils {
 
@@ -26,5 +30,13 @@ public class JudgeUtils {
         }else{
             activity.startActivity(intent);
         }
+    }
+
+    public static void startSearchListActivity(Activity activity, String searchText) {
+
+        Intent intent = new Intent(activity,SearchListActivity.class);
+        intent.putExtra(Constants.SEARCH_TEXT,searchText);
+        activity.startActivity(intent);
+
     }
 }

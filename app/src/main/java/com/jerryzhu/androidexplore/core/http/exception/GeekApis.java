@@ -4,6 +4,7 @@ import com.jerryzhu.androidexplore.core.bean.BaseResponse;
 import com.jerryzhu.androidexplore.core.bean.mainpager.banner.BannerData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.login.LoginData;
+import com.jerryzhu.androidexplore.core.bean.mainpager.search.TopSearchData;
 import com.jerryzhu.androidexplore.core.bean.mainpager.useful.UsefulData;
 
 import java.util.List;
@@ -119,5 +120,23 @@ public interface GeekApis {
     @GET("friend/json")
     Observable<BaseResponse<List<UsefulData>>> getUsefulData();
 
+    /**
+     * 热搜
+     * http://www.wanandroid.com/hotkey/json
+     *
+     * @return 热门搜索数据
+     */
+    @GET("hotkey/json")
+    Observable<BaseResponse<List<TopSearchData>>> getTopSearchData();
 
+    /**
+     * 搜索
+     * http://www.wanandroid.com/article/query/0/json
+     * @param page page
+     * @param k POST search key
+     * @return 搜索数据
+     */
+    @POST("article/query/{page}/json")
+    @FormUrlEncoded
+    Observable<BaseResponse<FeedArticleListData>> getSearchList(@Path("page") int page, @Field("k") String k);
 }

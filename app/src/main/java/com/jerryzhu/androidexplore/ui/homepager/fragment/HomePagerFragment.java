@@ -21,7 +21,7 @@ import com.jerryzhu.androidexplore.core.bean.mainpager.collect.FeedArticleListDa
 import com.jerryzhu.androidexplore.core.event.AutoLoginEvent;
 import com.jerryzhu.androidexplore.core.event.LoginEvent;
 import com.jerryzhu.androidexplore.presenter.homepager.HomePagerPresenter;
-import com.jerryzhu.androidexplore.ui.homepager.adapter.HomePageraAapter;
+import com.jerryzhu.androidexplore.ui.homepager.adapter.SearchListAdapter;
 import com.jerryzhu.androidexplore.ui.main.activity.LoginActivity;
 import com.jerryzhu.androidexplore.utils.CommonUtils;
 import com.jerryzhu.androidexplore.utils.GlideImageLoader;
@@ -44,7 +44,7 @@ public class HomePagerFragment extends BaseRootFragment<HomePagerPresenter> impl
     SmartRefreshLayout mSmartRefreshLayout;
     private boolean isRecreate;
     private List<FeedArticleData> mFeedArticleDataList;
-    private HomePageraAapter mHomePageraAapter;
+    private SearchListAdapter mHomePageraAapter;
     private int mArticlePosition;
     private Banner mBanner;
 
@@ -57,7 +57,7 @@ public class HomePagerFragment extends BaseRootFragment<HomePagerPresenter> impl
     @Override
     protected void initView() {
         mFeedArticleDataList = new ArrayList<>();
-        mHomePageraAapter = new HomePageraAapter(R.layout.item_home_pager, mFeedArticleDataList);
+        mHomePageraAapter = new SearchListAdapter(R.layout.item_search_pager, mFeedArticleDataList);
         mHomePageraAapter.setOnItemClickListener((adapter, view, position) -> {
             startArticleDetailPager(view,position);
 

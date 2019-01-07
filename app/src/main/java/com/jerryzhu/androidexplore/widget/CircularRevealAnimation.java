@@ -84,7 +84,7 @@ public class CircularRevealAnimation {
 
         Animator animator = ViewAnimationUtils.createCircularReveal(showView, svX, svY, startRadius, endRadius);
         showView.setVisibility(View.VISIBLE);
-        animator.setDuration(500);
+        animator.setDuration(200);
         animator.setInterpolator(new DecelerateInterpolator());
 
         animator.addListener(new Animator.AnimatorListener() {

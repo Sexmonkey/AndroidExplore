@@ -1,11 +1,17 @@
 package com.jerryzhu.androidexplore.presenter.main;
 
+import com.jerryzhu.androidexplore.R;
+import com.jerryzhu.androidexplore.app.AndroidExploreApp;
 import com.jerryzhu.androidexplore.base.presenter.BasePresenter;
 import com.jerryzhu.androidexplore.bridge.main.SearchDialogBridge;
 import com.jerryzhu.androidexplore.bridge.main.SearchDialogBridge.Presenter;
 import com.jerryzhu.androidexplore.core.DataManager;
+import com.jerryzhu.androidexplore.core.bean.mainpager.search.TopSearchData;
 import com.jerryzhu.androidexplore.core.dao.HistoryData;
 import com.jerryzhu.androidexplore.utils.RxUtils;
+import com.jerryzhu.androidexplore.widget.BaseObserver;
+import com.orhanobut.logger.Logger;
+
 import java.util.List;
 import javax.inject.Inject;
 import io.reactivex.Observable;
@@ -23,11 +29,13 @@ public class SearchDialogPresenter extends BasePresenter<SearchDialogBridge.View
 
     @Override
     public List<HistoryData> loadAllHistoryData() {
-        return null;
+        return mDataManager.loadAllHistoryData();
     }
 
     @Override
     public void clearAllHistoryData() {
+
+        mDataManager.clearHistoryData();
 
     }
 
@@ -57,6 +65,19 @@ public class SearchDialogPresenter extends BasePresenter<SearchDialogBridge.View
 
     @Override
     public void getTopSearchData() {
+
+        addSubscribe(mDataManager.getTopSearchData()
+                .compose(RxUtils.rxObSchedulerHelper())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new BaseObserver<List<TopSearchData>>(
+                        mView,AndroidExploreApp.getInstance().getString(R.string.failed_to_obtain_top_data),false) {
+                    @Override
+                    public void onNext(List<TopSearchData> topSearchDataList) {
+
+                        mView.showTopSearchData(topSearchDataList);
+
+                    }
+                }));
 
     }
 }
